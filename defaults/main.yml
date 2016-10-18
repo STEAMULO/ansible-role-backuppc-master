@@ -21,3 +21,5 @@ backuppc_XferLogLevel: 1
 # Rsync
 backuppc_RsyncClientCmd: '$sshPath -q -x -l root $host $rsyncPath $argList+'
 backuppc_RsyncClientRestoreCmd: '$sshPath -q -x -l root $host $rsyncPath $argList+'
+
+backuppc_rebuild_default_apache_conf: false

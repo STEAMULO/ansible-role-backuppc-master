@@ -41,9 +41,11 @@
     src: "etc/apache2/conf-available/backuppc.conf.j2"
     dest: "/etc/apache2/conf-available/backuppc.conf"
   notify: restart apache
+  when: backuppc_rebuild_default_apache_conf
 
 - name: BackupPC-master | Configure apache backuppc vhost
   template:
     src: "etc/apache2/sites-available/000-default.conf.j2"
     dest: "/etc/apache2/sites-available/000-default.conf"
   notify: restart apache
+  when: backuppc_rebuild_default_apache_conf
