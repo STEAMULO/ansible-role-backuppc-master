@@ -26,11 +26,22 @@ $Conf{BackupFilesExclude} = {
 
 $Conf{XferMethod} = '{{ item.xfermethod | default("rsync") }}';
 
-$Conf{ClientCharsetLegacy} = 'utf-8';
+$Conf{ClientCharsetLegacy} = '{{ item.charset | default("utf-8") }}';
 
-{% if item.more is defined %}
-# More options...
-{% for key, value in item.more.iteritems() %}
+{% if item.rsync_share_name is defined %}
+$Conf{RsyncShareName} = {
+	'*' => [
+{% for item in item.rsync_share_name %}
+		'{{ item }}'{% if not loop.last %},{% endif %}
+
+{% endfor %}
+	]
+};
+{% endif %}
+
+
+{% if item.others is defined %}
+{% for key, value in item.others.iteritems() %}
 {% if value is string %}
 $Conf{{ '{' }}{{ key }}{{ '}' }} = '{{ value }}';
 {% else %}

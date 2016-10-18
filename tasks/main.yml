@@ -1,10 +1,9 @@
 ---
 
-- name: INCLUDE | Install
+- name: BackupPC-master | Install
   include: install.yml
+  tags: install
 
-- name: INCLUDE | Configuration
+- name: BackupPC-master | Configuration
   include: config.yml
-
-- name: INCLUDE | SSH related configuration
-  include: ssh.yml
+  tags: config

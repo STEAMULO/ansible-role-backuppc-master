@@ -1,0 +1,20 @@
+backuppc_server_name: "test.localhost.com"
+
+backuppc_RsyncClientCmd: '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
+backuppc_RsyncClientRestoreCmd: '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
+
+backuppc_hosts:
+    - hostname: "localhost"
+      state: "present"
+      include_files: []
+      exclude_files: []
+      xfermethod: 'tar'
+      others:
+        TarShareName:
+            - '/etc/backuppc'
+            - '/etc/apache2'
+        TarClientCmd: '/usr/bin/env LC_ALL=C $tarPath -c -v -f - -C $shareName --totals'
+        TarFullArgs: '$fileList'
+        TarIncrArgs: '--newer=$incrDate $fileList'
+    - hostname: "serveur1.steamulo.org"
+      state: "absent"

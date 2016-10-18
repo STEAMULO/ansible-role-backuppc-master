@@ -1,21 +1,27 @@
 ---
 
-- name: APT | Install BackupPC and few related tools
-  apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
+- name: BackupPC-master | Install BackupPC and few related tools
+  apt: pkg="{{ item }}" state=present update_cache=yes cache_valid_time=3600
   with_items:
     - backuppc
     - fcgiwrap
     - libfile-rsyncp-perl
-    - ohai
   register: install
 
-- name: SETUP | with ohai
-  action: setup
-  when: install.changed
+- name: BackupPC-master | Create SSH key for backuppc user
+  user:
+    name: "{{ backuppc_user }}"
+    generate_ssh_key: yes
+    ssh_key_bits: "{{ backuppc_ssh_key_bits | default (omit) }}"
+    ssh_key_comment: "backuppc@{{ backuppc_server_name }}"
 
-- name: USER | Create SSH key for backuppc user
-  user: >
-    name=backuppc
-    generate_ssh_key=yes
-    ssh_key_bits={{ backuppc_ssh_key_bits | default (omit) }}
-    ssh_key_comment=backuppc@{{ backuppc_server_name }}
+- name: BackupPC-master | Check SSH public key
+  become_user: "{{ backuppc_user }}"
+  command: /bin/cat ~/.ssh/id_rsa.pub
+  register: cat
+  changed_when: False
+  tags: print_ssh_key
+
+- name: BackupPC-master | Print SSH public key
+  debug: var=cat.stdout
+  tags: print_ssh_key

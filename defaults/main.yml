@@ -1,8 +1,6 @@
 ---
 
-backuppc_server_name: "{{ ansible_hostname }}"
-backuppc_fetch_ssh_key: false
-backuppc_local_fetch_dir: "./fetch"
+backuppc_user: "backuppc"
 backuppc_hosts: []
 
 #
@@ -23,4 +21,3 @@ backuppc_XferLogLevel: 1
 # Rsync
 backuppc_RsyncClientCmd: '$sshPath -q -x -l root $host $rsyncPath $argList+'
 backuppc_RsyncClientRestoreCmd: '$sshPath -q -x -l root $host $rsyncPath $argList+'
-

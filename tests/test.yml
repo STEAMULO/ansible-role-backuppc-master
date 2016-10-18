@@ -1,44 +1,7 @@
 ---
-
 - hosts: all
-  pre_tasks:
-    - apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
-      with_items:
-        - vim
-        - nginx
-    - copy: src=vhost_nginx dest=/etc/nginx/sites-available/default
-      notify: reload nginx
-  handlers:
-    - name: reload nginx
-      service: name=nginx state=reloaded
-  vars:
-    backuppc_fetch_ssh_key: true
-    backuppc_RsyncClientCmd: '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
-    backuppc_RsyncClientRestoreCmd: '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
-    backuppc_BackupFilesExclude:
-      - /proc
-    backuppc_hosts:
-      - hostname: 192.168.65.92
-        state: present
-        include_files:
-          - /root
-          - /etc
-          - /var
-        exclude_files:
-          - /var/lib/mysql
-          - /var/log
-          - /var/cache
-        more:
-          DumpPreUserCmd: '$sshPath -q -x -l backuppc $host echo "I can dump mysql here!"'
-      - hostname: archive
-        state: present
-        xfermethod: archive
-        more:
-          ArchiveDest: '/tmp'
-      - hostname: arry_in_more
-        state: present
-        more:
-          RsyncArgsExtra: ['--bwlimit=45']
+  become: true
+  vars_files:
+    - test-vars
   roles:
-    - ../../
-
+    - ../../ansible-role-backuppc-master

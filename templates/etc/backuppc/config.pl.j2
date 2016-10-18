@@ -2049,8 +2049,8 @@ Content-Type: text/plain; charset="utf-8"
 #    $Conf{CgiAdminUsers}     = 'craig celia';
 #    --> administrative users are only craig and celia'.
 #
-$Conf{CgiAdminUserGroup} = 'backuppc';
-$Conf{CgiAdminUsers} = 'backuppc';
+$Conf{CgiAdminUserGroup} = '{{ backuppc_user }}';
+$Conf{CgiAdminUsers} = '{{ backuppc_user }}';
 
 #
 # URL of the BackupPC_Admin CGI script.  Used for email messages.
