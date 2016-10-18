@@ -59,6 +59,6 @@
 - name: BackupPC-master | Configure nginx backuppc vhost (nginx should be already installed by another way)
   template:
     src: "etc/nginx/sites-enabled/backuppc.conf.j2"
-    dest: "/etc/nginx/sites-enabled/backuppc.conf" mode=0644
+    dest: "/etc/nginx/sites-enabled/backuppc.conf"
   notify: restart nginx
   when: backuppc_vhost_nginx
