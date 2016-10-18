@@ -18,6 +18,18 @@ backuppc_IncrPeriod: 0.97
 backuppc_PingMaxMsec: 200
 backuppc_XferLogLevel: 1
 
+backuppc_TopDir: '/var/lib/backuppc'
+backuppc_ConfDir: '/etc/backuppc'
+backuppc_LogDir: '/var/log/backuppc/backuppc.log'
+backuppc_InstallDir: '/usr/share/backuppc'
+backuppc_CgiDir: '/usr/share/backuppc/cgi-bin'
+
+backuppc_EMailNotifyMinDays: '2.5'
+backuppc_EMailFromUserName: 'backuppc'
+backuppc_EMailAdminUserName: 'backuppc'
+backuppc_EMailUserDestDomain: ''
+
+
 # Rsync
 backuppc_RsyncClientCmd: '$sshPath -q -x -l root $host $rsyncPath $argList+'
 backuppc_RsyncClientRestoreCmd: '$sshPath -q -x -l root $host $rsyncPath $argList+'

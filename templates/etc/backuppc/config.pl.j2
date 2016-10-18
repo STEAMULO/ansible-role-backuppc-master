@@ -312,7 +312,7 @@ $Conf{DHCPAddressRanges} = [];
 #
 # The BackupPC user.
 #
-$Conf{BackupPCUser} = 'backuppc';
+$Conf{BackupPCUser} = '{{ backuppc_user }}';
 
 #
 # Important installation directories:
@@ -334,11 +334,11 @@ $Conf{BackupPCUser} = 'backuppc';
 # a symbolic link to the new location, or mount the new BackupPC
 # store at the existing $Conf{TopDir} setting.
 #
-$Conf{TopDir} = '/var/lib/backuppc';
-$Conf{ConfDir} = '/etc/backuppc';
-$Conf{LogDir} = '/var/lib/backuppc/log';
-$Conf{InstallDir} = '/usr/share/backuppc';
-$Conf{CgiDir} = '/usr/share/backuppc/cgi-bin';
+$Conf{TopDir} = '{{ backuppc_TopDir }}';
+$Conf{ConfDir} = '{{ backuppc_ConfDir }}';
+$Conf{LogDir} = '{{ backuppc_LogDir }}';
+$Conf{InstallDir} = '{{ backuppc_InstallDir }}';
+$Conf{CgiDir} = '{{ backuppc_CgiDir }}';
 
 #
 # Whether BackupPC and the CGI script BackupPC_Admin verify that they
@@ -1905,14 +1905,14 @@ $Conf{SendmailPath} = '/usr/sbin/sendmail';
 # rounded up (ie: 2.5 means a user will never receive email more
 # than once every 3 days).
 #
-$Conf{EMailNotifyMinDays} = '2.5';
+$Conf{EMailNotifyMinDays} = '{{ backuppc_EMailNotifyMinDays }}';
 
 #
 # Name to use as the "from" name for email.  Depending upon your mail
 # handler this is either a plain name (eg: "admin") or a fully-qualified
 # name (eg: "admin@mydomain.com").
 #
-$Conf{EMailFromUserName} = 'backuppc';
+$Conf{EMailFromUserName} = '{{ backuppc_EMailFromUserName }}';
 
 #
 # Destination address to an administrative user who will receive a
@@ -1921,7 +1921,7 @@ $Conf{EMailFromUserName} = 'backuppc';
 # handler this is either a plain name (eg: "admin") or a fully-qualified
 # name (eg: "admin@mydomain.com").
 #
-$Conf{EMailAdminUserName} = 'backuppc';
+$Conf{EMailAdminUserName} = '{{ backuppc_EMailAdminUserName }}';
 
 #
 # Destination domain name for email sent to users.  By default
@@ -1932,7 +1932,7 @@ $Conf{EMailAdminUserName} = 'backuppc';
 #
 # With this setting user email will be set to 'user@mydomain.com'.
 #
-$Conf{EMailUserDestDomain} = '';
+$Conf{EMailUserDestDomain} = '{{ backuppc_EMailUserDestDomain }}';
 
 #
 # This subject and message is sent to a user if their PC has never been
