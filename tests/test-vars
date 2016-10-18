@@ -1,4 +1,6 @@
 backuppc_server_name: "test.localhost.com"
+backuppc_vhost_apache: true
+backuppc_vhost_rewrite_slash: true
 
 backuppc_RsyncClientCmd: '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
 backuppc_RsyncClientRestoreCmd: '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'

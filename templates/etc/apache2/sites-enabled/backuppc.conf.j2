@@ -6,14 +6,17 @@
         # match this virtual host. For the default virtual host (this file) this
         # value is not decisive as it is used as a last resort host regardless.
         # However, you must set it for any further virtual host explicitly.
-        #ServerName www.example.com
+        {% if backuppc_vhost_host is defined %}
+        ServerName {{ backuppc_vhost_host }}
+        {% endif %}
 
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
 
 
-        # On redirige les appels au nom de domain principal vers backuppc en attendant qu'il y ait d'autres Appli
+        {% if backuppc_vhost_rewrite_slash %}
         RedirectMatch ^/$ /backuppc/
+        {% endif %}
 
         # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
         # error, crit, alert, emerg.
