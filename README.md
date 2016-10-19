@@ -72,8 +72,20 @@ Example Playbook
     backuppc_hosts:
         - hostname: "localhost"
           state: "present"
-          include_files: []
-          exclude_files: []
+          include_files:
+              test:
+                - 'file1x'
+                - 'file2x'
+              '*':
+                - 'file1x*'
+                - 'file2x*'
+          exclude_files:
+              test:
+                - 'file1'
+                - 'file2'
+              '*':
+                - 'file1*'
+                - 'file2*'
           xfermethod: 'tar'
           others:
             TarShareName:

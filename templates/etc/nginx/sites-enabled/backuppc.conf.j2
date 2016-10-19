@@ -1,14 +1,14 @@
 server {
   listen 80;
   {% if backuppc_vhost_host is defined %}
-  server_name {{ backuppc_vhost_host }}
+  server_name {{ backuppc_vhost_host }};
   {% endif %}
 
   access_log /var/log/nginx/backuppc.access_log;
   error_log  /var/log/nginx/backuppc.error_log;
 
   {% if backuppc_vhost_rewrite_slash %}
-  rewrite  ^/$ /backuppc
+  rewrite  ^/$ /backuppc;
   {% endif %}
 
   location /backuppc {

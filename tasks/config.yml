@@ -1,5 +1,19 @@
 ---
 
+#- name: BackupPC-master | Add BackupPC user to www-data group
+#  user: name="{{ backuppc_user }}" groups=www-data append=yes
+- name: BackupPC-master | Ensure BackupPC backup dir exists
+  file: path="{{ item }}" state=directory owner="{{ backuppc_user }}" group="{{ backuppc_user }}"
+  with_items:
+    - "{{ backuppc_TopDir }}"
+    - "{{ backuppc_TopDir }}/pc"
+    - "{{ backuppc_TopDir }}/cpool"
+    #- "{{ backuppc_ConfDir }}"
+    - "{{ backuppc_LogDir }}"
+    #- "{{ backuppc_InstallDir }}"
+    #- "{{ backuppc_CgiDir }}"
+  tags: backuppc
+
 - name: BackupPC-master | Global BackupPC configuration
   template:
     src: "etc/backuppc/config.pl.j2"

@@ -4,23 +4,31 @@
 
 {% if item.include_files is defined %}
 $Conf{BackupFilesOnly} = {
-	'*' => [
-{% for item in item.include_files %}
-		'{{ item }}'{% if not loop.last %},{% endif %}
+{% for key, value in item.include_files.iteritems() %}
+	'{{ key }}' => [
+{% for file in value %}
+		'{{ file }}'{% if not loop.last %},{% endif %}
 
 {% endfor %}
-	]
+	]{% if not loop.last %},
+{% endif %}
+{% endfor %}
+
 };
 {% endif %}
 
 {% if item.exclude_files is defined %}
 $Conf{BackupFilesExclude} = {
-	'*' => [
-{% for item in item.exclude_files %}
-		'{{ item }}'{% if not loop.last %},{% endif %}
+{% for key, value in item.exclude_files.iteritems() %}
+	'{{ key }}' => [
+{% for file in value %}
+		'{{ file }}'{% if not loop.last %},{% endif %}
 
 {% endfor %}
-	]
+	]{% if not loop.last %},
+{% endif %}
+{% endfor %}
+
 };
 {% endif %}
 
@@ -29,14 +37,12 @@ $Conf{XferMethod} = '{{ item.xfermethod | default("rsync") }}';
 $Conf{ClientCharsetLegacy} = '{{ item.charset | default("utf-8") }}';
 
 {% if item.rsync_share_name is defined %}
-$Conf{RsyncShareName} = {
-	'*' => [
+$Conf{RsyncShareName} = [
 {% for item in item.rsync_share_name %}
-		'{{ item }}'{% if not loop.last %},{% endif %}
+	'{{ item }}'{% if not loop.last %},{% endif %}
 
 {% endfor %}
-	]
-};
+	];
 {% endif %}
 
 
