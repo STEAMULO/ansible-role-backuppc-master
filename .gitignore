@@ -1,8 +1,27 @@
-.idea
+### Code ###
+# Visual Studio Code - https://code.visualstudio.com/
+.settings/
+.vscode/
+tsconfig.json
+jsconfig.json
+
+
+### Intellij ###
+.idea/
 *.iml
-**/roles/steaminterne.*
-**/roles/steamulo.*
-**/roles/galaxy.*
-.galaxy_install_info
+
+## File-based project format:
+*.iws
+
+# IntelliJ
+/out/
+
+### Vagrant ###
+.vagrant/
+tests/.vagrant/
+
+
+### Ansible ###
 *.retry
-.vagrant
+tests/roles/
+tests/*.retry
